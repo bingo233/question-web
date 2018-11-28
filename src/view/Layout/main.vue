@@ -33,14 +33,14 @@ export default {
       return !this.slider.isCollapse
     },
     toggelSliderClass() {
-      console.log(this.isCollapse)
+      console.log(this.isCollapse);
       return this.isCollapse ? 'app-slider-close' : 'app-slider-open'
     }
   },
   mixins:resize,
   data() {
     return {
-      
+
     }
   },
   components:{
@@ -56,7 +56,7 @@ export default {
     -webkit-animation:slider-open 0.5s ease;
   }
   .app-slider-close{
-    
+
     -webkit-animation:slider-close 0.5s ease;
     width: 60px !important;
   }

@@ -1,5 +1,5 @@
 var log4js = require('log4js');//加载log4js模块
-console.log1("11111")
+console.log1("11111");
 // var express = require('express');
 // var path = require("path");
 

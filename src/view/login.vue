@@ -44,15 +44,15 @@
       }
     },
     mounted() {
-      
+
     },
     methods: {
       loginCheck() {
         this.loginLoading = true;
         loginApi.loginCheck(this.formData, res => {
           if (res.code === 200) {
-            console.log(res.data)
-            auth.setToken(res.data)
+            console.log(res.data);
+            auth.setToken(res.data);
             window.location.reload()
           }else {
             this.$message.error(res.content);

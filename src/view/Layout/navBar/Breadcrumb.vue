@@ -5,7 +5,7 @@
       <span class="split">/</span>
     </span>
     <span class="breadcrumb-item" >
-      <a href="javascript:;" class="current">{{currentRoute}}</a>
+      <a href="javascript:" class="current">{{currentRoute}}</a>
       <span class="split"></span>
     </span>
   </div>

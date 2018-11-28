@@ -9,9 +9,9 @@ import 'element-ui/lib/theme-chalk/index.css';
 import '@/styles/index.less'
 import '@/icons'
 
-Vue.use(ElementUI)
+Vue.use(ElementUI);
 
-Vue.config.productionTip = false
+Vue.config.productionTip = false;
 
 /* eslint-disable no-new */
 new Vue({
@@ -20,4 +20,4 @@ new Vue({
   store,
   components: { App },
   template: '<App/>'
-})
+});

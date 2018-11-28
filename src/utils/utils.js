@@ -18,18 +18,18 @@ export default{
          if (a[pName] === item[idName]) {
           //item[cName] = a
           if(!item[cName]){
-            item[cName] = new Array()
+            item[cName] = []
           }
-          item[cName].push(a)
+          item[cName].push(a);
           a._delete = true
          }
        })
-     })
+     });
 
      const newArr = arr.filter(item => {
        return !item._delete
-     })
-     
+     });
+
      return newArr
   }
 }

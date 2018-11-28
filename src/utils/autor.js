@@ -1,7 +1,7 @@
 import Cookie from 'js-cookie'
 import { ColorPicker } from 'element-ui';
 
-const cookieKey = 'EQ'
+const cookieKey = 'EQ';
 
 export default {
   getToken() {

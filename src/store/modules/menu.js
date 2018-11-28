@@ -13,13 +13,13 @@ const menu = {
       return new Promise((resolve, reject) => {
         menuApi.getMenuList(res => {
           if (res.code === 200) {
-            commit("SET_MENUS",res.data)
+            commit("SET_MENUS",res.data);
             resolve(res.data)
           }
         })
       })
     }
   }
-}
+};
 
 export default menu

@@ -8,7 +8,7 @@ import errorPage from '@/view/jobs/404'
 import auth from '@/utils/autor'
 import store from '@/store'
 
-Vue.use(Router)
+Vue.use(Router);
 
 const router = new Router({
   routes: [
@@ -38,9 +38,9 @@ const router = new Router({
       component: errorPage
     }
   ]
-})
+});
 
-const whiteList = ['/login','/500']// 不重定向白名单
+const whiteList = ['/login','/500'];// 不重定向白名单
 
 // 判断是否与访问权限
 const checkRouter = function(to){
@@ -53,7 +53,7 @@ const checkRouter = function(to){
     }
   });
   return hasRole;
-}
+};
 
 router.beforeEach((to, from, next) => {
   if (auth.getToken()) {
@@ -78,6 +78,6 @@ router.beforeEach((to, from, next) => {
       next({path: '/login'})
     }
   }
-})
+});
 
 export default router
