@@ -1,7 +1,7 @@
 import query from "@/utils/query"
 
-export default function (callback){
-  query.get("getSvg").then(res => {
+export default function (params,callback){
+  query.get("getSvg",params).then(res => {
     callback(res)
   })
 }

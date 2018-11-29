@@ -24,6 +24,9 @@ Axios.interceptors.response.use(response => {
       console.log(e)
     }
   }
+  if (res.code === 500) {
+    Message.error(res.title)
+  }
   return res;
 }, error => {
   console.log(error)
