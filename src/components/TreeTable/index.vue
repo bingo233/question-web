@@ -8,12 +8,10 @@
             <i v-if="!scope.row._expanded" class="el-icon-plus" />
             <i v-else class="el-icon-minus"/>
           </span>
-        <span>{{scope.row[firstColLabel]}}</span>
+        <span>{{scope.row[firstColProp]}}</span>
       </template>
       </el-table-column>
       <slot></slot>
-      <!--<el-table-column label="事件" prop="event"></el-table-column>-->
-      <!--<el-table-column label="备注" prop="comment"></el-table-column>-->
     </el-table>
   </div>
 </template>

@@ -8,12 +8,12 @@
       >
       <template v-for="(item,idx) in routes" > 
 
-        <el-submenu :index="item.path+'/'+item.childrens[0].path" v-if="item.children && item.children.length > 0" :key="idx">
+        <el-submenu v-if="item.children && item.children.length > 0" :index="item.children[0].path" :key="idx">
           <template slot="title">
             <svg-icon :icon="item.icon" v-if="item.icon"></svg-icon>
             <span v-if="item.name">{{item.name}}</span>
           </template>
-          <el-menu-item :index="item.path+'/'+menu.path" v-for="(menu,index) in item.children" :key="index">
+          <el-menu-item :index="menu.path" v-for="(menu,index) in item.children" :key="index">
             <svg-icon :icon="menu.icon" v-if="menu.icon"></svg-icon>
             <span v-if="menu.name">{{menu.name}}</span>
           </el-menu-item>
@@ -41,6 +41,9 @@ export default {
       type: Boolean,
       default: false
     }
+  },
+  created() {
+    console.log(this.routes)
   }
 }
 </script>

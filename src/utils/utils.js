@@ -2,31 +2,31 @@ export default{
   isString(value) {
     return typeof value === 'string'
   },
-  arrToThree(arr, {idName='id',pName='pid',cName='childrens'}) {
-     if(!arr) {
+  arrToThree(array, {idName='id',pName='pid',cName='childrens'}) {
+     if(!array) {
       return []
      }
-     if(this.isString(arr)){
-       arr = JSON.parse(arr)
+     if(this.isString(array)){
+      array = JSON.parse(array)
      }
-     if(!Array.isArray(arr)) {
+     if(!Array.isArray(array)) {
       return []
      }
     //  console.log(arr)
-     arr.forEach(item => {
-      arr.forEach((a,idx) => {
+    array.forEach(item => {
+      array.forEach((a,idx) => {
          if (a[pName] === item[idName]) {
           //item[cName] = a
           if(!item[cName]){
             item[cName] = []
           }
-          item[cName].push(a);
+          item[cName].push(Object.assign({},a));
           a._delete = true
          }
        })
      });
 
-     const newArr = arr.filter(item => {
+     const newArr = array.filter(item => {
        return !item._delete
      });
 

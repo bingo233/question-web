@@ -11,7 +11,7 @@ const menu = {
   actions: {
     getMenus({ commit }) {
       return new Promise((resolve, reject) => {
-        menuApi.getMenuList(res => {
+        menuApi.getUserMenus(res => {
           if (res.code === 200) {
             commit("SET_MENUS",res.data);
             resolve(res.data)

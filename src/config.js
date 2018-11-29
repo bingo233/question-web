@@ -3,7 +3,8 @@ export default{
   "baseURL": "http://localhost:3000",
   "api": {
     "loginCheck": "/login/loginCheck",
+    "getUserMenus": "/menus/getUserMenus",
     "getMenus": "/menus/getMenus",
-    "test": "/"
+    "getSvg": "/upload/getSvg"
   }
 }

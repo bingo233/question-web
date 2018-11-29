@@ -18,16 +18,21 @@
         <el-button type="primary" class="login-btn" @click="loginCheck" :loading="loginLoading">登录</el-button>
       </el-form>
     </div>
+    <svg t="1539155019608" class="icon" v-html="svgPath" style="" viewBox="0 0 1028 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2345" xmlns:xlink="http://www.w3.org/1999/xlink" width="18.0703125" height="18">
+     
+    </svg>
   </div>
 </template>
 
 <script>
   import loginApi from "@/api/login"
   import auth from '@/utils/autor'
+  import svgApi from '@/api/svg'
 
   export default {
     data() {
       return {
+        svgPath: '',
         loginLoading: false,
         formData: {
           acc:'',
@@ -44,7 +49,9 @@
       }
     },
     mounted() {
-
+      svgApi(res => {
+        this.svgPath = res
+      })
     },
     methods: {
       loginCheck() {

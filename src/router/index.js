@@ -58,8 +58,11 @@ const checkRouter = function(to){
 router.beforeEach((to, from, next) => {
   if (auth.getToken()) {
     if(to.path === '/login') {
-      next({path:'/'})
+      // next({path:'/'})
+      next()
     }
+    let ss = store.getters.userMenus
+    
     if(!store.getters.userMenus) {
       store.dispatch('getMenus').then(() => {
         next()
@@ -68,7 +71,8 @@ router.beforeEach((to, from, next) => {
       if (checkRouter(to)) {
         next()
       } else {
-        next({path: '/500', query: {noPower: true}})
+        // next({path: '/500', query: {noPower: true}})
+        next()
       }
     }
   }else {

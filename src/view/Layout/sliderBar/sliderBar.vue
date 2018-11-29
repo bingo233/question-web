@@ -14,11 +14,12 @@
 import {mapGetters} from 'vuex'
 import sliderMenu from './sliderMenu'
 import utils from '@/utils/utils'
+const util = require("util")
 
 export default {
   data() {
     return {
-      routes: this.$store.getters.userMenus
+      // routes: this.$store.getters.userMenus
     }
   },
   components:{
@@ -26,14 +27,19 @@ export default {
   },
   computed:{
     ...mapGetters([
-      'slider'
+      'slider',
+      'userMenus'
     ]),
     isCollapse() {
       return !this.slider.isCollapse
+    },
+    routes() {
+      console.log(this.userMenus,2222)
+      return utils.arrToThree(JSON.stringify(this.userMenus),{cName:'children'})
     }
   },
   mounted(){
-    console.log(this.$store.getters.userMenus)
+    // console.log(this.$store.getters.userMenus)
   }
 }
 </script>
