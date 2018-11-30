@@ -18,20 +18,16 @@
         <el-button type="primary" class="login-btn" @click="loginCheck" :loading="loginLoading">登录</el-button>
       </el-form>
     </div>
-    <web-svg svgId="b2c6588bb25c467c2d0d7cfa771e1837"></web-svg>
-    <web-svg svgId="4df9b6a93897da97eb8616806705e9f3"></web-svg>
+    <web-svg svgId="5c40733b3f0a77fd47c94c4275e8517e"></web-svg>
+    <web-svg svgId="6a9d3b46f932849d5a79815f455f240c"></web-svg>
   </div>
 </template>
 
 <script>
   import loginApi from "@/api/login"
   import auth from '@/utils/autor'
-  import webSvg from '@/components/SvgIcon/webSvg'
 
   export default {
-    components:{
-      webSvg
-    },
     data() {
       return {
         svgPath: '',

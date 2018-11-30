@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="sys-menu-container">
     <el-form :model="queryData" :inline="true" >
       <el-form-item label="菜单名称">
         <el-input v-model="queryData.likeStr"></el-input>
@@ -18,28 +18,34 @@
     </tree-table>
 
     <el-dialog :title="updateDialog.title" :visible.sync="updateDialog.show" width="600px">
-      <el-form :model="updateDialog.formData" label-width="80px">
-        <el-form-item label="父级菜单">
+      <el-form :model="formData" label-width="80px" :rules="formRules" ref="menuForm">
+        <el-form-item label="父级菜单" prop="pid">
           <el-cascader
             :options="menuData"
             :props="cascaderProps"
             style="width: 480px"
-            v-model="updateDialog.formData.pid">
+            @change="selectParentMenu"
+            :change-on-select="true"
+            v-model="parentSelector">
           </el-cascader>
         </el-form-item>
-        <el-form-item label="菜单名称">
-          <el-input v-model="updateDialog.formData.name" placeholder=""></el-input>
+        <el-form-item label="菜单名称" prop="name">
+          <el-input v-model="formData.name" placeholder=""></el-input>
         </el-form-item>
-        <el-form-item label="链接地址">
-          <el-input v-model="updateDialog.formData.path" placeholder=""></el-input>
+        <el-form-item label="链接地址" prop="url">
+          <el-input v-model="formData.url" placeholder=""></el-input>
         </el-form-item>
-        <el-form-item label="菜单图标">
-          <div style="width:50px;height:50px;border:1px solid red;"></div>
+        <el-form-item label="菜单图标" prop="icon">
+          <div class="menu-svg-box">
+            <web-svg :svgId="svgId" width="40px" height="40px"></web-svg>
+          </div>
           <el-upload
             class="upload-demo"
             action="http://localhost:3000/upload/uploadSvg"
-            @on-success="svgUploadSuccess"
-            
+            :on-success="svgUploadSuccess"
+            :show-file-list="false"
+            accept="image/svg+xml"
+            :multiple="false"
             :file-list="fileList">
             <el-button size="small" type="primary">点击上传</el-button>
             <div slot="tip" class="el-upload__tip">只能上传jpg/png文件，且不超过500kb</div>
@@ -48,7 +54,7 @@
       </el-form>
       <div slot="footer" class="dialog-footer">
         <el-button @click="updateDialog.show = false">取 消</el-button>
-        <el-button type="primary" @click="updateDialog.show = false">确 定</el-button>
+        <el-button type="primary" @click="submitForm">确 定</el-button>
       </div>
     </el-dialog>
   </div>
@@ -58,9 +64,12 @@
   import treeTable from '@/components/TreeTable'
   import utils from '@/utils/utils'
   import menuApi from '@/api/menu'
+  import webSvg from '@/components/SvgIcon/webSvg'
+
   export default{
     components:{
-      treeTable
+      treeTable,
+      webSvg
     },
     data() {
       return {
@@ -71,14 +80,26 @@
         updateDialog: {
           title: '新增菜单',
           show: false,
-          formData: {}
         },
+        formData: {},
         cascaderProps: {
           value: 'id',
           label: 'name',
           children: 'children'
         },
-        fileList: []
+        svgId: '',
+        fileList: [],
+        parentSelector: [],
+        formRules: {
+          name: [
+            { required: true, message: '请输入菜单名称', trigger: 'blur' },
+            { max: 5, message: '长度不可以大于5个字符', trigger: 'blur' }
+          ],
+          url: [
+            { required: true, message: '请输入菜单路径', trigger: 'blur' },
+            { max: 100, message: '长度不可以大于100个字符', trigger: 'blur' }
+          ]
+        }
       }
     },
     mounted() {
@@ -92,9 +113,39 @@
           }
         })
       },
+      selectParentMenu(value) {
+        this.formData.path = value.join('/')
+        this.formData.pid = value[value.length-1]
+      },
       svgUploadSuccess(response, file, fileList) {
-        console.log(response)
+        this.formData.icon = this.svgId = response.filename
+      },
+      submitForm() {
+        this.$refs.menuForm.validate((valid) => {
+          if (valid) {
+            console.log(this.formData)
+            alert('submit!');
+          } else {
+            console.log('error submit!!');
+            return false;
+          }
+        });
       }
     }
   }
 </script>
+
+<style lang="less">
+// style="width:50px;height:50px;border:1px solid red;"
+.sys-menu-container{
+  .menu-svg-box{
+    width: 50px;
+    height: 50px;
+    background: #909399;
+    color: #ffffff;
+    text-align: center;
+    overflow: hidden;
+    line-height: 81px;
+  }
+}
+</style>

@@ -1,7 +1,7 @@
 <template>
-  <svg t="1539155019608" class="icon" v-html="svgPath" viewBox="0 0 1028 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2345" xmlns:xlink="http://www.w3.org/1999/xlink" :width="width" :height="height" style="fill: currentColor;">
+  <span v-html="svgPath" class="web-svg-container" :style="containerStyle">
 
-  </svg>
+  </span>
 </template>
 
 <script>
@@ -11,7 +11,12 @@
       name: "webSvg",
       data() {
         return {
-          svgPath: ''
+          svgPath: '',
+          containerStyle: {
+            display: 'inline-block',
+            width: this.width,
+            height: this.height
+          }
         }
       },
       props: {
@@ -20,18 +25,31 @@
             default: ''
           },
           width: {
-            type: Number,
-            default: 18
+            type: String,
+            default: '18px'
           },
           height: {
-            type: Number,
-            default: 18
+            type: String,
+            default: '18px'
           }
       },
+      watch: {
+        svgId() {
+          if (!this.svgId) {
+            return this.svgPath = ''
+          }
+          svgApi({id:this.svgId},res => {
+            this.svgPath = res
+          })
+        }
+      },
       mounted() {
-        svgApi({id:this.svgId},res => {
-          this.svgPath = res
-        })
+        if (!this.id) {
+          return this.svgPath = ''
+        }
+        // svgApi({id:this.svgId},res => {
+        //   this.svgPath = res
+        // })
       }
     }
 </script>
