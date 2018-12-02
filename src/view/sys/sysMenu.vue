@@ -65,6 +65,7 @@
   import utils from '@/utils/utils'
   import menuApi from '@/api/menu'
   import webSvg from '@/components/SvgIcon/webSvg'
+  import menu from "../../store/modules/menu";
 
   export default{
     components:{
@@ -124,7 +125,9 @@
         this.$refs.menuForm.validate((valid) => {
           if (valid) {
             console.log(this.formData)
-            alert('submit!');
+            menuApi.saveMenu(this.formData, res => {
+              console.log(res)
+            })
           } else {
             console.log('error submit!!');
             return false;

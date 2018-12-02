@@ -53,3 +53,9 @@
       }
     }
 </script>
+
+<style>
+  .web-svg-container svg{
+    fill: currentColor;
+  }
+</style>

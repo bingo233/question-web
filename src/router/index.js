@@ -59,10 +59,10 @@ router.beforeEach((to, from, next) => {
   if (auth.getToken()) {
     if(to.path === '/login') {
       // next({path:'/'})
-      next()
+      return next()
     }
     let ss = store.getters.userMenus
-    
+
     if(!store.getters.userMenus) {
       store.dispatch('getMenus').then(() => {
         next()

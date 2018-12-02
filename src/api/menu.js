@@ -10,5 +10,10 @@ export default{
     query.get("getMenus").then(res => {
       callback(res)
     })
+  },
+  saveMenu(params, callback){
+    query.get("saveMenu",params).then(res => {
+      callback(res)
+    })
   }
 }

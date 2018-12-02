@@ -5,6 +5,7 @@ export default{
     "loginCheck": "/login/loginCheck",
     "getUserMenus": "/menus/getUserMenus",
     "getMenus": "/menus/getMenus",
-    "getSvg": "/upload/getSvg"
+    "getSvg": "/upload/getSvg",
+    "saveMenu": "/menus/saveMenu"
   }
 }
