@@ -11,7 +11,7 @@
         <el-button type="primary" @click="updateDialog = {show:true,title:'新增菜单'}">新增</el-button>
       </el-form-item>
     </el-form>
-    <tree-table :loading="listLoading" :tabData="menuData" firstColLabel="名称" firstColProp="name" :expendAll="false" childrenName="children">
+    <tree-table :loading="listLoading" :tabData="menuData" firstColLabel="名称" firstColProp="name" :expendAll="true" childrenName="children">
       <!--<el-table-column label="id" prop="id"></el-table-column>-->
       <el-table-column label="路径" prop="url"></el-table-column>
       <el-table-column label="备注" prop="comment"></el-table-column>
@@ -145,13 +145,13 @@
             delete this.formData._show
             delete this.formData.isParent
             delete this.formData.children
-            
+
             menuApi.saveMenu(this.formData, res => {
               if (res.code == 200) {
                 this.updateDialog.show = false;
                 this.getMenus()
               } else {
-                
+
               }
             })
           } else {
