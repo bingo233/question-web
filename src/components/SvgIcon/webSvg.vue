@@ -1,5 +1,5 @@
 <template>
-  <span v-html="svgPath" class="web-svg-container" :style="containerStyle">
+  <span v-html="svgPath" class="web-svg-container" :class="webSvgClass" :data-key="svgId+'---ssss'" :style="containerStyle">
 
   </span>
 </template>
@@ -31,25 +31,35 @@
           height: {
             type: String,
             default: '18px'
+          },
+          webSvgClass: {
+            type: String
           }
       },
       watch: {
         svgId() {
+          
           if (!this.svgId) {
             return this.svgPath = ''
           }
           svgApi({id:this.svgId},res => {
-            this.svgPath = res
+            console.log(this.svgId,111)
+            if (res && res.code == 200) {
+              console.log(res)
+              this.svgPath = res.data
+            }else {
+              this.svgPath = ''
+            }
           })
         }
       },
       mounted() {
-        if (!this.id) {
-          return this.svgPath = ''
+        if (!this.svgId) {
+          return false;
         }
-        // svgApi({id:this.svgId},res => {
-        //   this.svgPath = res
-        // })
+        svgApi({id:this.svgId},res => {
+          this.svgPath = res.data
+        })
       }
     }
 </script>

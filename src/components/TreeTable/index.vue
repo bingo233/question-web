@@ -1,6 +1,6 @@
 <template>
   <div class="tree-table-box">
-    <el-table :data="tableData" :row-style="showRow" v-bind="$attrs" :border="true">
+    <el-table v-loading="loading" :data="tableData" :row-style="showRow" v-bind="$attrs" :border="true">
       <el-table-column :label="firstColLabel" :prop="firstColProp" width="200" :show-overflow-tooltip="true">
       <template slot-scope="scope">
         <span class="table-tree-space" v-for="space in scope.row._level" :key="space"></span>
@@ -42,6 +42,10 @@ export default {
     childrenName: {
       type: String,
       default: 'children'
+    },
+    loading: {
+      type: Boolean,
+      default: false
     }
   },
   data() {

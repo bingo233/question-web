@@ -6,6 +6,7 @@ export default{
     "getUserMenus": "/menus/getUserMenus",
     "getMenus": "/menus/getMenus",
     "getSvg": "/upload/getSvg",
-    "saveMenu": "/menus/saveMenu"
+    "saveMenu": "/menus/saveMenu",
+    "deleteMenu": "/menus/deleteMenu"
   }
 }

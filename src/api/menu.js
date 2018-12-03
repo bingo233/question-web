@@ -15,5 +15,10 @@ export default{
     query.get("saveMenu",params).then(res => {
       callback(res)
     })
+  },
+  deleteMenu(params, callback) {
+    query.get("deleteMenu", params).then(res => {
+      callback(res)
+    })
   }
 }

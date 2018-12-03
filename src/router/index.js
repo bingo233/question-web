@@ -61,7 +61,6 @@ router.beforeEach((to, from, next) => {
       // next({path:'/'})
       return next()
     }
-    let ss = store.getters.userMenus
 
     if(!store.getters.userMenus) {
       store.dispatch('getMenus').then(() => {

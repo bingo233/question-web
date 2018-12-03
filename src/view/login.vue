@@ -18,8 +18,6 @@
         <el-button type="primary" class="login-btn" @click="loginCheck" :loading="loginLoading">登录</el-button>
       </el-form>
     </div>
-    <web-svg svgId="5c40733b3f0a77fd47c94c4275e8517e"></web-svg>
-    <web-svg svgId="6a9d3b46f932849d5a79815f455f240c"></web-svg>
   </div>
 </template>
 

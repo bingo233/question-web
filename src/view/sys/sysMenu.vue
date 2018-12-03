@@ -8,13 +8,24 @@
         <el-button type="primary">搜索</el-button>
       </el-form-item>
       <el-form-item label="">
-        <el-button type="primary" @click="updateDialog.show = true">新增</el-button>
+        <el-button type="primary" @click="updateDialog = {show:true,title:'新增菜单'}">新增</el-button>
       </el-form-item>
     </el-form>
-    <tree-table :tabData="menuData" firstColLabel="名称" firstColProp="name" :expendAll="false" childrenName="children">
+    <tree-table :loading="listLoading" :tabData="menuData" firstColLabel="名称" firstColProp="name" :expendAll="false" childrenName="children">
       <!--<el-table-column label="id" prop="id"></el-table-column>-->
-      <el-table-column label="路径" prop="path"></el-table-column>
+      <el-table-column label="路径" prop="url"></el-table-column>
       <el-table-column label="备注" prop="comment"></el-table-column>
+      <el-table-column label="操作">
+        <template slot-scope="scope">
+          <el-button
+            size="mini"
+            @click="editForm(scope.$index, scope.row)">编辑</el-button>
+          <el-button
+            size="mini"
+            type="danger"
+            @click="deletForm(scope.$index, scope.row)">删除</el-button>
+      </template>
+      </el-table-column>
     </tree-table>
 
     <el-dialog :title="updateDialog.title" :visible.sync="updateDialog.show" width="600px">
@@ -82,6 +93,7 @@
           title: '新增菜单',
           show: false,
         },
+        listLoading: false,
         formData: {},
         cascaderProps: {
           value: 'id',
@@ -108,10 +120,13 @@
     },
     methods: {
       getMenus() {
+        this.listLoading = true
         menuApi.getMenus(res => {
           if (res.code === 200) {
             this.menuData = utils.arrToThree(res.data,{cName: 'children'})
+            console.log(this.menuData)
           }
+          this.listLoading = false
         })
       },
       selectParentMenu(value) {
@@ -124,15 +139,57 @@
       submitForm() {
         this.$refs.menuForm.validate((valid) => {
           if (valid) {
-            console.log(this.formData)
+            delete this.formData.parent
+            delete this.formData._level
+            delete this.formData._expanded
+            delete this.formData._show
+            delete this.formData.isParent
+            delete this.formData.children
+            
             menuApi.saveMenu(this.formData, res => {
-              console.log(res)
+              if (res.code == 200) {
+                this.updateDialog.show = false;
+                this.getMenus()
+              } else {
+                
+              }
             })
           } else {
             console.log('error submit!!');
             return false;
           }
         });
+      },
+      editForm(index , row) {
+        this.updateDialog = {
+          show: true,
+          title: '菜单编辑'
+        };
+
+        this.formData = row;
+        this.svgId = this.formData.icon
+      },
+      deletForm(index ,row ) {
+        this.$confirm('确定删除此条记录?', '提示', {
+          confirmButtonText: '确定',
+          cancelButtonText: '取消',
+          type: 'warning'
+        }).then(() => {
+          menuApi.deleteMenu({id: row.id}, res => {
+            if (res.code == 200) {
+              this.$message({
+                message: res.title,
+                type: 'success'
+              });
+              this.getMenus()
+            }else {
+              this.$message({
+                message: res.title,
+                type: 'error'
+              });
+            }
+          })
+        })
       }
     }
   }

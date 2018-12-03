@@ -6,7 +6,8 @@ const api = config.api;
 
 const Axios = axios.create({
   "baseURL": config.baseURL,
-  "timeout": 60000
+  "timeout": 60000,
+  "withCredentials": true, // 意思是携带cookie信息,保持session的一致性
 });
 
 Axios.interceptors.response.use(response => {
