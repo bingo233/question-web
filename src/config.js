@@ -7,6 +7,7 @@ export default{
     "getMenus": "/menus/getMenus",
     "getSvg": "/upload/getSvg",
     "saveMenu": "/menus/saveMenu",
-    "deleteMenu": "/menus/deleteMenu"
+    "deleteMenu": "/menus/deleteMenu",
+    "getRoles": "/role/getRoles"
   }
 }

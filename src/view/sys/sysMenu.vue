@@ -8,7 +8,7 @@
         <el-button type="primary">搜索</el-button>
       </el-form-item>
       <el-form-item label="">
-        <el-button type="primary" @click="updateDialog = {show:true,title:'新增菜单'}">新增</el-button>
+        <el-button type="primary" @click="addMenu">新增</el-button>
       </el-form-item>
     </el-form>
     <tree-table :loading="listLoading" :tabData="menuData" firstColLabel="名称" firstColProp="name" :expendAll="true" childrenName="children">
@@ -35,6 +35,7 @@
             :options="menuData"
             :props="cascaderProps"
             style="width: 480px"
+            :clearable="true"
             @change="selectParentMenu"
             :change-on-select="true"
             v-model="parentSelector">
@@ -130,11 +131,21 @@
         })
       },
       selectParentMenu(value) {
+        console.log(value)
         this.formData.path = value.join('/')
         this.formData.pid = value[value.length-1]
       },
       svgUploadSuccess(response, file, fileList) {
         this.formData.icon = this.svgId = response.filename
+      },
+      addMenu() {
+        this.updateDialog = {
+          show:true,
+          title:'新增菜单'
+        }
+        this.formData = {}
+        this.svgId = ""
+        this.parentSelector = []
       },
       submitForm() {
         this.$refs.menuForm.validate((valid) => {
@@ -167,6 +178,8 @@
         };
 
         this.formData = row;
+        this.parentSelector = row.path ? row.path.split('/'):[]
+        console.log(this.parentSelector,1111)
         this.svgId = this.formData.icon
       },
       deletForm(index ,row ) {

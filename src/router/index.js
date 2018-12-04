@@ -4,6 +4,7 @@ import HelloWorld from '@/view/HelloWorld'
 import layout from '@/view/Layout/main'
 import login from '@/view/login'
 import sysMenu from '@/view/sys/sysMenu'
+import sysRole from '@/view/sys/sysRole'
 import errorPage from '@/view/jobs/404'
 import auth from '@/utils/autor'
 import store from '@/store'
@@ -30,6 +31,11 @@ const router = new Router({
           path: 'sysMenu',
           component: sysMenu,
           meta:{name:'系统菜单', icon: 'personnel'},
+        },
+        {
+          path: 'sysRole',
+          component: sysRole,
+          meta: {name:'角色管理'}
         }
       ]
     },
