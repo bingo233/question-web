@@ -2,7 +2,7 @@ export default{
   isString(value) {
     return typeof value === 'string'
   },
-  arrToThree(array, {idName='id',pName='pid',cName='childrens'}) {
+  arrToThree(array, {idName='id',pName='pid',cName='children'}) {
      if(!array) {
       return []
      }

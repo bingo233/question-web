@@ -8,6 +8,9 @@ export default{
     "getSvg": "/upload/getSvg",
     "saveMenu": "/menus/saveMenu",
     "deleteMenu": "/menus/deleteMenu",
-    "getRoles": "/role/getRoles"
+    "getRoles": "/role/getRoles",
+    "getAllDatas": "/data/queryAll",
+    "deleteData": "/data/deleteData",
+    "saveData": "/data/saveData"
   }
 }

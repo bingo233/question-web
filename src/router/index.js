@@ -5,6 +5,7 @@ import layout from '@/view/Layout/main'
 import login from '@/view/login'
 import sysMenu from '@/view/sys/sysMenu'
 import sysRole from '@/view/sys/sysRole'
+import sysData from '@/view/sys/sysData'
 import errorPage from '@/view/jobs/404'
 import auth from '@/utils/autor'
 import store from '@/store'
@@ -36,6 +37,11 @@ const router = new Router({
           path: 'sysRole',
           component: sysRole,
           meta: {name:'角色管理'}
+        },
+        {
+          path: 'sysData',
+          component: sysData,
+          meta: {name: '公共数据'}
         }
       ]
     },
